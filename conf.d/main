@@ -14,6 +14,9 @@ rm -rf $SRC/Plone-*
 # enable initscript
 update-rc.d plone defaults
 
+# replace default overview with custom welcome page
+mv $SRC/plone-overview.pt $DEST/buildout-cache/eggs/Products.CMFPlone-4.1.4-py2.6.egg/Products/CMFPlone/browser/templates/plone-overview.pt
+
 # apache configuration
 a2dissite default
 a2ensite plone
