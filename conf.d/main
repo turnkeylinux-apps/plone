@@ -1,0 +1,23 @@
+#!/bin/sh -ex
+
+SRC=/usr/local/src
+DEST=/usr/local/share/plone
+
+ADMIN_PASS=turnkey
+
+# unpack and configure
+tar -zxf $SRC/Plone-*.tgz -C $SRC
+rm $SRC/Plone-*.tgz
+$SRC/Plone-*/install.sh --target=$DEST --with-python=/usr/bin/python2.6 --password=$ADMIN_PASS --without-lxml zeo
+rm -rf $SRC/Plone-*
+
+# enable initscript
+update-rc.d plone defaults
+
+# apache configuration
+a2dissite default
+a2ensite plone
+a2enmod proxy
+a2enmod proxy_http
+a2enmod rewrite
+
