@@ -1,0 +1,18 @@
+#include <turnkey/base>
+
+apache2
+webmin-apache
+
+python-dev
+python-imaging
+ssl-cert
+build-essential
+libreadline-dev
+libjpeg62-dev
+libxml2-dev
+libxslt1-dev
+
+postfix
+webmin-postfix
+
+bzip2
