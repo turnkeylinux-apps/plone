@@ -1,0 +1,22 @@
+NameVirtualHost *:80
+NameVirtualHost *:443
+
+<VirtualHost *:80>
+    UseCanonicalName Off
+    ServerAdmin webmaster@localhost
+    RewriteEngine On
+    RewriteRule ^/(.*)$ http://127.0.0.1:8080/VirtualHostBase/http/%{SERVER_NAME}:80/VirtualHostRoot/$1 [L,P]
+    ErrorLog /var/log/apache2/plone_error.log
+    CustomLog /var/log/apache2/plone_access.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerAdmin webmaster@localhost
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/cert.pem
+    RewriteEngine On
+    RewriteRule ^/(.*)$ http://127.0.0.1:8080/VirtualHostBase/https/%{SERVER_NAME}:443/VirtualHostRoot/$1 [L,P]
+    ErrorLog /var/log/apache2/plone_error.log
+    CustomLog /var/log/apache2/plone_access.log combined
+</VirtualHost>
+
