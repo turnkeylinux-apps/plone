@@ -1,0 +1,129 @@
+#!/bin/sh
+# /etc/init.d/plone
+# Startup script for Plone installed with the
+# Unified Installer - ZEO
+#
+# description: Zope, a web application server
+# this works as is for a default universal plone linux install
+#
+
+RETVAL=0
+
+# list zeo clients in the list below
+zeoclients="client1 client2"
+
+clusterpath="/usr/local/share/plone/zeocluster"
+prog="ZEOServer"
+
+start() {
+    echo -n $"Starting $prog: "
+    output=`${clusterpath}/bin/plonectl zeoserver start`
+    # the return status of zopectl is not reliable, we need to parse
+    # its output via substring match
+    if echo $output | grep -q "start"; then
+            # success
+            echo success
+            RETVAL=0
+    elif echo $output | grep -q "daemon process already running"; then
+            # success
+            echo process already running
+            RETVAL=0
+    else
+            # failed
+            echo failure
+            RETVAL=1
+    fi
+    for client in $zeoclients
+        do
+            echo -n $"Starting $client: "
+            output=`${clusterpath}/bin/plonectl ${client} start`
+            # the return status of zopectl is not reliable, we need to parse
+            # its output via substring match
+            if echo $output | grep -q "start"; then
+                # success
+                # touch /var/lock/subsys/zope${client}
+                echo success
+                RETVAL=0
+            elif echo $output | grep -q "daemon process already running"; then
+                # success
+                echo process already running
+                RETVAL=0
+            else
+                # failed
+                echo failure
+                RETVAL=1
+            fi
+        done
+        return $RETVAL
+}
+
+stop() {
+
+for client in $zeoclients
+    do
+       echo -n $"Stopping $client: "
+       output=`${clusterpath}/bin/plonectl ${client} stop`
+       # the return status of zopectl is not reliable, we need to parse
+        # its output via substring match
+        if echo $output | grep -q "stop" || echo $output | grep -q "daemon manager not running" ; then
+            # success
+            # rm /usr/local/Plone/zeocluster/var/${client}/${client}.lock
+            echo success
+            RETVAL=0
+        else
+            # failed
+            echo failure
+            RETVAL=1
+        fi
+    done
+    echo -n $"Stopping $prog: "
+    output=`${clusterpath}/bin/plonectl zeoserver stop`
+    # the return status of zopectl is not reliable, we need to parse
+    # its output via substring match
+    if echo $output | grep -q "stop" || echo $output | grep -q "daemon manager not running"; then
+            # success
+            echo success
+            RETVAL=0
+    else
+            # failed
+            echo failure
+            RETVAL=1
+    fi
+        return $RETVAL
+}
+
+restart() {
+   stop
+   start
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+	echo Status:
+	echo -n $"Plone "
+	output=`${clusterpath}/bin/plonectl zeoserver status`
+	echo $output
+
+	for client in $zeoclients
+	do
+                echo -n $"Plone "
+		# echo "Zope Client" $client
+		output=`${clusterpath}/bin/plonectl ${client} status`
+		echo $output
+	done
+	;;
+  restart)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|status|restart}"
+    RETVAL=2
+esac
+
+exit $RETVAL
