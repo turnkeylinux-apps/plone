@@ -11,6 +11,13 @@ rm $SRC/Plone-*.tgz
 $SRC/Plone-*/install.sh --target=$DEST --with-python=/usr/bin/python2.6 --password=$ADMIN_PASS --without-lxml zeo
 rm -rf $SRC/Plone-*
 
+# make plone clients listen on localhost (we proxy through via apache)
+CONF=$DEST/zeocluster/buildout.cfg
+sed -i "s|^http-address.*|http-address = 127.0.0.1:8080|" $CONF
+sed -i "s|^client2-address.*|client2-address = 127.0.0.1:8081|" $CONF
+cd $DEST/zeocluster
+bin/buildout
+
 # enable initscript
 update-rc.d plone defaults
 
