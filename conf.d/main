@@ -5,10 +5,14 @@ DEST=/usr/local/share/plone
 
 ADMIN_PASS=turnkey
 
-# unpack and configure
+# unpack and install
 tar -zxf $SRC/Plone-*.tgz -C $SRC
 rm $SRC/Plone-*.tgz
-$SRC/Plone-*/install.sh --target=$DEST --with-python=/usr/bin/python2.6 --password=$ADMIN_PASS --without-lxml zeo
+
+[ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY
+$SRC/Plone-*/install.sh --target=$DEST --password=$ADMIN_PASS zeo
+unset HTTP_PROXY
+
 rm -rf $SRC/Plone-*
 
 # make plone clients listen on localhost (we proxy through via apache)
@@ -18,11 +22,11 @@ sed -i "s|^client2-address.*|client2-address = 127.0.0.1:8081|" $CONF
 cd $DEST/zeocluster
 bin/buildout
 
+# replace default overview with custom welcome page
+mv $SRC/plone-overview.pt $DEST/buildout-cache/eggs/Products.CMFPlone-*.egg/Products/CMFPlone/browser/templates/plone-overview.pt
+
 # enable initscript
 update-rc.d plone defaults
-
-# replace default overview with custom welcome page
-mv $SRC/plone-overview.pt $DEST/buildout-cache/eggs/Products.CMFPlone-4.1.4-py2.6.egg/Products/CMFPlone/browser/templates/plone-overview.pt
 
 # apache configuration
 a2dissite default
