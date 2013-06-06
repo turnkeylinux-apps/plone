@@ -2,7 +2,7 @@ turnkey-plone-12.1 (1) turnkey; urgency=low
 
   * Upgraded to latest version of Plone.
 
-  * Hardcoded component versions:
+  * Upstream source component versions:
 
     plone           4.2.4 (r3)
 
