@@ -29,7 +29,7 @@ mv $SRC/plone-overview.pt $DEST/buildout-cache/eggs/Products.CMFPlone-*.egg/Prod
 update-rc.d plone defaults
 
 # apache configuration
-a2dissite default
+a2dissite 000-default
 a2ensite plone
 a2enmod proxy
 a2enmod proxy_http
