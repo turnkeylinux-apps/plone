@@ -20,7 +20,7 @@ CONF=$DEST/zeocluster/buildout.cfg
 sed -i "s|^http-address.*|http-address = 127.0.0.1:8080|" $CONF
 sed -i "s|^client2-address.*|client2-address = 127.0.0.1:8081|" $CONF
 cd $DEST/zeocluster
-bin/buildout
+sudo -u plone_buildout bin/buildout
 
 # replace default overview with custom welcome page
 mv $SRC/plone-overview.pt $DEST/buildout-cache/eggs/Products.CMFPlone-*.egg/Products/CMFPlone/browser/templates/plone-overview.pt
