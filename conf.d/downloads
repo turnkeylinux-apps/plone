@@ -5,7 +5,7 @@ dl() {
     cd $2; curl -L -f -O $PROXY $1; cd -
 }
 
-VERSION="4.3/4.3.5/+download/Plone-4.3.5-UnifiedInstaller.tgz"
+VERSION="4.3/4.3.6/+download/Plone-4.3.6-UnifiedInstaller.tgz"
 URL="https://launchpad.net/plone/$VERSION"
 
 dl $URL /usr/local/src
