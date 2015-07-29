@@ -14,9 +14,6 @@ libxslt1-dev
 libghc-zlib-dev
 libssl-dev
 
-postfix
-webmin-postfix
-
 bzip2
 
 sudo

@@ -1,4 +1,4 @@
-COMMON_CONF = apache-credit postfix-local apache-vhost
+COMMON_CONF = apache-credit apache-vhost
 COMMON_OVERLAYS = apache
 
 CREDIT_LOCATION = ~ "^/(?!(.*manage|.*manage_main|.*plugins))"
