@@ -7,6 +7,16 @@
 # this works as is for a default universal plone linux install
 #
 
+### BEGIN INIT INFO
+# Provides:          plone
+# Required-Start:    $remote_fs
+# Required-Stop:     $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: plone
+# Description:       plone
+### END INIT INFO
+
 RETVAL=0
 
 # list zeo clients in the list below
