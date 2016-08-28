@@ -1,11 +1,8 @@
 #!/usr/bin/python
-"""Set Magento admin password and email, and domain to serve
+"""Set Plone initial admin password
 
 Option:
     --pass=     unless provided, will ask interactively
-    --email=    unless provided, will ask interactively
-    --domain=   unless provided, will ask interactively
-                DEFAULT=www.example.com
 """
 
 import sys
@@ -49,7 +46,6 @@ def main():
         password = d.get_password(
             "Plone Password",
             "Enter new password for the Plone 'admin' account.")
-
 
     for i in (1, 2):
         with open('/usr/local/share/plone/zeocluster/parts/client%d/inituser' % i, 'w') as f:
