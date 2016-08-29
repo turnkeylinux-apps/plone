@@ -102,10 +102,9 @@
                 </tal:many>
             </tal:block>
             <li tal:condition="not:sites">
-                <h3>Lets get you started</h3>
-                <p>1. <a href="/acl_users/manage_users?name=admin&submit=Edit">Change the <b>admin</b> password</a> (default: <b>turnkey</b>).
-                <p>2. Create a <a href="@@plone-addsite?site_id=plone">new Plone site</a>.</p>
-                <p>3. Create a VirtualHost to serve the site (optional): <pre>plone-add-apachevhost DOMAIN SITENAME</pre></p>
+                <h3>Let's get you started</h3>
+                <p>1. Create a <a href="@@plone-addsite?site_id=plone">new Plone site</a>.</p>
+                <p>2. Create a VirtualHost to serve the site (optional): <pre>plone-add-apachevhost DOMAIN SITENAME</pre></p>
                 <br/><br/>
             </li>
             <li>
