@@ -10,11 +10,13 @@ import getopt
 from executil import system
 
 from dialog_wrapper import Dialog
+from glob import glob
 
 BASEPATH = '/usr/local/share/plone'
 
-# will probably have to be changed for newer versions of Plone/Zope
-sys.path.append('%s/buildout-cache/eggs/Zope2-2.13.24-py2.7.egg/Zope2/utilities' % BASEPATH)
+ZOPEPATH = glob('%s/buildout-cache/eggs/Zope2-*.egg/Zope2/utilities' % BASEPATH)[0]
+sys.path.append(ZOPEPATH)
+
 import zpasswd
 
 def usage(s=None):
@@ -53,6 +55,8 @@ def main():
 
     for i in ('.installed', 'buildout'):
         system('sed -i "s/turnkey/%s/g" %s/zeocluster/%s.cfg' % (password, BASEPATH, i))
+
+    system('service plone restart')
 
 if __name__ == "__main__":
     main()
