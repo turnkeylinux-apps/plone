@@ -1,6 +1,6 @@
 turnkey-plone-15.0 (1) turnkey; urgency=low
 
-  * Upgraded to latest vrersion of Plone(v5.0.8)
+  * Upgraded to latest version of Plone(v5.0.8)
 
   * Install Adminer directly from stretch/main repo
 
