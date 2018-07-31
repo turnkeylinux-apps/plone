@@ -21,6 +21,10 @@ and on top of that:
       - Better debugging.
       - Reserve client for administrative access, etc...
 
+   **Security note**: Updates to Plone may require supervision so
+   they **ARE NOT** configured to install automatically. See `Plone
+   documentation`_ for upgrading.
+
    - Configured Plone/Zeo services to bind to localhost, with Apache
      rewriting URLS and proxying to the ZeoCluster
    - /usr/local/bin/plone-add-apachevhost: custom script to add Plone
@@ -40,3 +44,4 @@ Credentials *(passwords set at first boot)*
 
 .. _Plone: http://plone.org
 .. _TurnKey Core: https://www.turnkeylinux.org/core
+.. _Plone documentation: https://docs.plone.org/manage/upgrading/index.html
