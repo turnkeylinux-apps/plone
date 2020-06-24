@@ -4,7 +4,8 @@ apache2
 webmin-apache
 
 python-dev
-python-imaging
+python-pil
+python-setuptools
 ssl-cert
 build-essential
 libreadline-dev
