@@ -11,6 +11,9 @@ import subprocess
 
 from dialog_wrapper import Dialog
 
+DEFAULT_DOMAIN = "www.example.com"
+
+
 def usage(s=None):
     if s:
         print("Error:", s, file=sys.stderr)
@@ -18,7 +21,6 @@ def usage(s=None):
     print(__doc__, file=sys.stderr)
     sys.exit(1)
 
-DEFAULT_DOMAIN="www.example.com"
 
 def main():
     try:
@@ -41,8 +43,8 @@ def main():
             "Plone Password",
             "Enter new password for the Plone 'admin' account.")
 
-    subprocess.run(['python', '/usr/lib/inithooks/bin/plone_util.py', password])
+    subprocess.run(['/usr/lib/inithooks/bin/plone_util.py', password])
+
 
 if __name__ == "__main__":
     main()
-
