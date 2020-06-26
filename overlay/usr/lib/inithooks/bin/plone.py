@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Set Plone initial admin password
 
 Option:
@@ -7,32 +7,26 @@ Option:
 
 import sys
 import getopt
-from executil import system
+import subprocess
 
 from dialog_wrapper import Dialog
-from glob import glob
 
-BASEPATH = '/usr/local/share/plone'
+DEFAULT_DOMAIN = "www.example.com"
 
-ZOPEPATH = glob('%s/buildout-cache/eggs/Zope2-*.egg/Zope2/utilities' % BASEPATH)[0]
-sys.path.append(ZOPEPATH)
-
-import zpasswd
 
 def usage(s=None):
     if s:
-        print >> sys.stderr, "Error:", s
-    print >> sys.stderr, "Syntax: %s [options]" % sys.argv[0]
-    print >> sys.stderr, __doc__
+        print("Error:", s, file=sys.stderr)
+    print("Syntax: %s [options]" % sys.argv[0], file=sys.stderr)
+    print(__doc__, file=sys.stderr)
     sys.exit(1)
 
-DEFAULT_DOMAIN="www.example.com"
 
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
                                        ['help', 'pass='])
-    except getopt.GetoptError, e:
+    except getopt.GetoptError as e:
         usage(e)
 
     user = ''
@@ -49,15 +43,8 @@ def main():
             "Plone Password",
             "Enter new password for the Plone 'admin' account.")
 
-    for i in (1, 2):
-        with open('/usr/local/share/plone/zeocluster/parts/client%d/inituser' % i, 'w') as f:
-            f.write('admin:' + zpasswd.generate_passwd(password, 'SHA'))
+    subprocess.run(['/usr/lib/inithooks/bin/plone_util.py', password])
 
-    for i in ('.installed', 'buildout'):
-        system('sed -i "s/turnkey/%s/g" %s/zeocluster/%s.cfg' % (password, BASEPATH, i))
-
-    system('service plone restart')
 
 if __name__ == "__main__":
     main()
-
