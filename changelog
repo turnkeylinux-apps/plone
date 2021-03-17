@@ -1,3 +1,14 @@
+turnkey-plone-16.1 (1) turnkey; urgency=low
+
+  * Upgraded to latest supported version of Plone - v5.2.2.
+        (latest available version requires python >=3.8 which will not
+         be available in turnkey base until 17.x)
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Stefan Davis <stefan@turnkeylinux.org>  Tue, 16 Mar 2021 17:52:38 +1100
+
 turnkey-plone-16.0 (1) turnkey; urgency=low
 
   * Upgraded to latest version of Plone - v5.2.1.
