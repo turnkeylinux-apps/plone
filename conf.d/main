@@ -10,7 +10,8 @@ tar -zxf $SRC/Plone-*.tgz -C $SRC
 rm $SRC/Plone-*.tgz
 
 [ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY
-$SRC/Plone-*/install.sh --target=$DEST --password=$ADMIN_PASS zeo
+$SRC/Plone-*/install.sh --target=$DEST --password=$ADMIN_PASS \
+    --with-python=/usr/bin/python3 --nobuildout zeo
 unset HTTP_PROXY
 
 rm -rf $SRC/Plone-*
@@ -23,7 +24,7 @@ cd $DEST/zeocluster
 sudo -u plone_buildout bin/buildout
 
 # replace default overview with custom welcome page
-mv $SRC/plone-overview.pt $DEST/buildout-cache/eggs/Products.CMFPlone-*.egg/Products/CMFPlone/browser/templates/plone-overview.pt
+mv $SRC/plone-overview.pt $DEST/buildout-cache/eggs/cp39/Products.CMFPlone-*.egg/Products/CMFPlone/browser/templates/plone-overview.pt
 
 # enable initscript
 update-rc.d plone defaults
