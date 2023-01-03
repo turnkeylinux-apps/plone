@@ -9,7 +9,7 @@ import sys
 import getopt
 import subprocess
 
-from dialog_wrapper import Dialog
+from libinithooks.dialog_wrapper import Dialog
 
 DEFAULT_DOMAIN = "www.example.com"
 

@@ -3,9 +3,10 @@
 apache2
 webmin-apache
 
-python-dev
-python-pil
-python-setuptools
+python3-dev
+python3-pil
+python3-setuptools
+python3-venv
 ssl-cert
 build-essential
 libreadline-dev
