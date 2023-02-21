@@ -1,6 +1,6 @@
 turnkey-plone-17.0 (1) turnkey; urgency=low
 
-  * Upgraded to latest LTS version of Plone - v5.2.11
+  * Upgraded to latest supported version of Plone - v5.2.10
 
   * Updated all relevant Debian packages to Bullseye/11 versions
 
